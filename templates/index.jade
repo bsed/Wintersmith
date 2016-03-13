@@ -1,0 +1,47 @@
+
+extends layout
+
+block content
+	include author
+	include date
+
+	each article in articles
+		.index
+			a(href=article.url)
+				h2= article.title
+				
+				p.metadata
+					- var a = contents.authors[article.metadata.author + '.json'];
+					if a
+						img.ava_small(src="../../authors/#{a.metadata.ava}")
+
+						span= a.metadata.name
+						span.dot  •
+						span
+							mixin date(article.metadata.date)
+
+					else
+						img.ava_small(src=article.metadata.author.ava)
+
+						span= article.metadata.author.name
+						span.dot  •
+						span
+							mixin date(article.metadata.date)
+
+				section
+					if article.intro.length > 0
+						!= typogr(article.intro).typogrify()
+					//- if article.hasMore
+					//- 	p.more
+					//- 		a(href=article.url) More
+
+			hr
+
+block prepend footer
+	div
+		if prevPage
+			a(href=prevPage.url) ← Предыдущие
+		//- else
+		//- 	a(href='/archive.html') « Archives
+		if nextPage
+			a(href=nextPage.url) Следующие →

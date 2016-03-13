@@ -1,0 +1,85 @@
+extends layout
+
+block prepend title
+	| #{ page.title + ' - '}
+
+block content
+	include author
+	include date
+
+	- var auth = contents.authors[page.metadata.author + '.json'];
+
+	.parallax
+		if auth
+			img.ava_big(src="../../authors/#{auth.metadata.ava}")
+		else
+			img.ava_big(src=page.metadata.author.ava)
+
+		h1= page.title
+
+		p.metadata
+			if auth
+				img.ava_small(src="../../authors/#{auth.metadata.ava}")
+			else
+				img.ava_small(src=page.metadata.author.ava)
+			
+			span
+				if auth
+					a(href=auth.metadata.link target="_blank")= auth.metadata.name
+				else
+					a(href=page.metadata.author.link target="_blank")= page.metadata.author.name
+			span.dot  •
+			span
+				a(href=page.url)
+					yo
+					mixin date(page.date)
+
+	.parallax.displayNone
+		if auth
+			img.ava_big(src="../../authors/#{auth.metadata.ava}")
+		else
+			img.ava_big(src=page.metadata.author.ava)
+
+		h1= page.title
+
+		p.metadata
+			if auth
+				img.ava_small(src="../../authors/#{auth.metadata.ava}")
+			else
+				img.ava_small(src=page.metadata.author.ava)
+			
+			span
+				if auth
+					a(href=auth.metadata.link target="_blank")= auth.metadata.name
+				else
+					a(href=page.metadata.author.link target="_blank")= page.metadata.author.name
+			span.dot  •
+			span
+				a(href=page.url)
+					yo
+					mixin date(page.date)
+
+	article!= typogr(page.html).typogrify()
+		hr
+
+	script(src="/js/article.js")
+
+	.comments
+		#disqus_thread
+		script.
+			var disqus_config = function () {
+				this.page.url = page.title;
+				this.page.identifier = page.title;
+			};
+			(function() {
+				var d = document, s = d.createElement('script');
+				s.src = '//framer-russia.disqus.com/embed.js';
+				s.setAttribute('data-timestamp', +new Date());
+				(d.head || d.body).appendChild(s);
+			})();
+
+		noscript
+			p please enable JavaScript to view the
+				a(href="https://disqus.com/?ref_noscript", rel="nofollow") comments powered by Disqus.
+
+block prepend footer

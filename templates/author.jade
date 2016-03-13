@@ -1,0 +1,8 @@
+
+mixin author(authorName)
+  - var author = contents.authors[authorName + '.json'];
+  span
+    if author
+      a(href=author.metadata.link target="_blank")= author.metadata.name
+    else
+      = authorName

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:image" content="learnframer.ru/framer.png">
+    <link rel="alternate" href="http://localhost:8080/feed.xml" type="application/rss+xml" title="Блог о прототипировании интерактивных продуктов">
+    <title>Бесплатный Framer.js на Windows и OS X - Блог про Фреймер
+    </title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800,800italic,700italic,700,600italic,600,400italic,300italic,300&amp;subset=latin,cyrillic,cyrillic-ext,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700&amp;subset=latin,cyrillic-ext,cyrillic,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Cousine:400,400italic,700,700italic&amp;subset=latin,cyrillic,cyrillic-ext,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Mono&amp;subset=latin,cyrillic,latin-ext,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+  </head>
+  <body>
+    <header>
+      <ul class="logo">
+        <li><a href="/">Блог про Фреймер</a></li>
+        <li><a href="https://www.facebook.com/groups/prototypingclub/" target="_blank">Сообщество</a></li>
+      </ul>
+    </header>
+    <div class="content">
+      <div class="parallax"><img src="../../authors/anton.png" class="ava_big">
+        <h1>Бесплатный Framer.js на Windows и OS X</h1>
+        <p class="metadata"><img src="../../authors/anton.png" class="ava_small"><span><a href="http://facebook.com/antonkartashov" target="_blank">Антон Карташов</a></span><span class="dot"> •</span><span><a href="/articles/on-windows-and-mac-for-free/">
+              <yo></yo>
+                    <time datetime="2016-03-04T09:00:00+03:00" title="Fri Mar 04 2016 09:00:00 GMT+0300">04 марта&nbsp;2016</time></a></span>
+        </p>
+      </div>
+      <div class="parallax displayNone"><img src="../../authors/anton.png" class="ava_big">
+        <h1>Бесплатный Framer.js на Windows и OS X</h1>
+        <p class="metadata"><img src="../../authors/anton.png" class="ava_small"><span><a href="http://facebook.com/antonkartashov" target="_blank">Антон Карташов</a></span><span class="dot"> •</span><span><a href="/articles/on-windows-and-mac-for-free/">
+              <yo></yo>
+                    <time datetime="2016-03-04T09:00:00+03:00" title="Fri Mar 04 2016 09:00:00 GMT+0300">04 марта&nbsp;2016</time></a></span>
+        </p>
+      </div>
+      <article><p>Framer.js и Framer Studio — разные вещи. Framer.js — это бесплатная JavaScript-библиотека, которой можно пользоваться в любом редакторе кода; Framer Studio — платное приложение. Я расскажу, как с помощью редактора Atom пользоваться Фреймером бесплатно на Windows и <span class="caps">OS</span>&nbsp;X.</p>
+<p><img src="/articles/on-windows-and-mac-for-free/framerjs-in-atom.png" alt="Framer.js в редакторе кода Atom"></p>
+<hr>
+<blockquote>
+<p>Эта статья — дополненный перевод статьи Кенни Чена <a href="http://www.prototypingwithframer.com/framer-on-windows-with-atom/">Using Framer on Windows with Atom</a> из его блога Prototyping with&nbsp;Framer</p>
+</blockquote>
+<p>Прототип во Фреймере — это обычный сайт, который выглядит как папка с файлами (шаблон проекта можно скачать <a href="https://github.com/koenbok/Framer#get-started">в репозитории Фреймера</a> на&nbsp;Гитхабе:</p>
+<ul>
+<li><strong>index.html</strong> запускается для просмотра прототипа. Он уже правильно настроен для любого проекта. Его придется менять, если вы хотите обновить ссылку на новую версию библиотеки Framer.js, либо добавляете в проект другие JavaScript-библиотеки (<a href="http://d3js.org">D3.js</a>, <a href="http://hammerjs.github.io">Hammer.js</a>).</li>
+<li><strong>app.coffee</strong> — главный файл проекта. Здесь мы пишем весь код на языке&nbsp;CoffeeScript. </li>
+<li><strong>app.js</strong> — скомпилированный код прототипа, который будет работать в браузере. Он получается автоматически из файла&nbsp;app.coffee.</li>
+<li><strong>/framer</strong> — папка с самой библиотекой (ее можно удалить, т. к. в репозитории хранится очень старый&nbsp;шаблон).</li>
+<li><strong>/images</strong> — папка с нарезкой нашего макета, шрифтами и прочими&nbsp;файлами. </li>
+</ul>
+<p><img src="/articles/on-windows-and-mac-for-free/project.png" alt="Framer New Project">
+<small>Типичный проект во Фреймере</small></p>
+<p>Все эти операции: создание нового проекта, конвертация CoffeeScript, моментальный предпросмотр прототипа — делает Framer Studio. Нам же придется организовать их&nbsp;самостоятельно. </p>
+<h2 id="1-">1. Установка&nbsp;Атома</h2>
+<p>Атом — редактор кода от разработчиков Гитхаба. Его стоит выбрать за удобный интерфейс установки плагинов, в котором ненужно лезть в командную строку и учить команды наизусть. Скачать&nbsp;здесь:</p>
+<p><center><h3><a href="https://atom.io">atom.io</a></h2></center><br></p>
+<p>После установки мы видим экран&nbsp;приветствия:</p>
+<p><img src="/articles/on-windows-and-mac-for-free/01-welcome.png" alt="Welcome to Atom"></p>
+<p>Нужно выбрать Install a Package › Open Installer и попадаем&nbsp;сюда:</p>
+<p><img src="/articles/on-windows-and-mac-for-free/02-install.png" alt="Installer"></p>
+<h2 id="2-coffee-compile-html-preview">2. Установка Coffee-Compile и&nbsp;<span class="caps">HTML</span>-Preview</h2>
+<p>Вбиваем в поиске coffee compile и html preview. Устанавливаем&nbsp;их:</p>
+<p><img src="/articles/on-windows-and-mac-for-free/03-coffee-compile.png" alt="Coffee-Compile">
+<img src="/articles/on-windows-and-mac-for-free/04-html-preview.png" alt="HTML-Preview"></p>
+<p>Теперь нужно правильно настроить&nbsp;плагины:</p>
+<ul>
+<li>в настройках Coffee-Compile включить <strong>Compile on save without preview</strong>. Наш код будет конвертироваться в JavaScript по каждому нажатию <kbd>Ctrl</kbd><kbd>S</kbd> на Винде (и <kbd>Cmd</kbd><kbd>S</kbd> на&nbsp;Маке). </li>
+<li>в настройках <span class="caps">HTML</span>-Preview включить <strong>Trigger On Save</strong>. Как только изменится файл с JavaScript, превью моментально отобразит все&nbsp;изменения.</li>
+</ul>
+<p><img src="/articles/on-windows-and-mac-for-free/05-coffee-compile-settings.png" alt="Coffee-Compile Settings">
+<img src="/articles/on-windows-and-mac-for-free/06-compile-on-save.png" alt="Compile CoffeeScript on save">
+<img src="/articles/on-windows-and-mac-for-free/07-html-preview-settings.png" alt="HTML-Preview Settings">
+<img src="/articles/on-windows-and-mac-for-free/08-preview-trigger-on-save.png" alt="Trigger on save"></p>
+<h2 id="3-">3. Обвновление шаблона&nbsp;проекта</h2>
+<p>Каждый новый проект создается на основе шаблона. Его нужно скачать <a href="https://github.com/koenbok/Framer#get-started">из репозитория Фреймера</a> на&nbsp;Гитхабе:</p>
+<p><img src="/articles/on-windows-and-mac-for-free/09-framer-github.png" alt="Framer Repository"></p>
+<p>Теперь откроем папку в Атоме. Чтобы открылся весь проект, а не один его файл, не кликайте по папке два раза — просто выделите ее и нажмите кнопку Open (либо <kbd>Enter</kbd>).</p>
+<p><img src="/articles/on-windows-and-mac-for-free/10-open-project.png" alt="Open project"></p>
+<p>Если все сделано правильно, то слева в редакторе мы увидим список файлов нашего проекта. Первым делом нужно переименовать файл app.js в&nbsp;app.coffee:</p>
+<p><img src="/articles/on-windows-and-mac-for-free/11-rename-app-js.png" alt="Rename app.js"></p>
+<p>Теперь заходим в index.html и в самом низу ищем строчку, где подключается библиотека: <code>&lt;script src=&quot;framer/framer.js&quot;&gt;&lt;/script&gt;</code>.</p>
+<p><img src="/articles/on-windows-and-mac-for-free/12-index-html.png" alt="index.html"></p>
+<blockquote>
+<p><strong>Важно!</strong> Обновите ссылку на&nbsp;библиотеку.</p>
+<p>Шаблон в репозитории не менялся больше года, поэтому по адресу “framer/framer.js” лежит старая библиотека без последних обновлений. Актуальная версия находятся на сайте <a href="http://builds.framerjs.com">builds.framerjs.com</a>. </p>
+</blockquote>
+<p><img src="/articles/on-windows-and-mac-for-free/13-builds.png" alt="builds.framerjs.com">
+<small><a href="http://builds.framerjs.com">builds.framerjs.com</a></small></p>
+<p>Вы можете скачать файлик framer.js и положить его в папку проекта, либо просто скопировать ссылку. (Во втором случае для работы прототипа потребуется доступ в&nbsp;интернет.)</p>
+<p><img src="/articles/on-windows-and-mac-for-free/14-link.png" alt="New framerjs.com"></p>
+<h2 id="4-">4. Превью&nbsp;прототипа</h2>
+<p>Чтобы включить превью, нажимаем правой кнопкой внутри index.html и выбираем <strong>Preview <span class="caps">HTML</span></strong>.</p>
+<p><img src="/articles/on-windows-and-mac-for-free/15-preview.png" alt="HTML Preview"></p>
+<p>Теперь можно закрыть вкладку index.html (но не <strong>index.html Preview</strong>). Попробуем написать пробный код, чтобы проверить работу&nbsp;окружения:</p>
+<ul>
+<li>я сохранил в папку images изображение с домашним экраном&nbsp;Айфона.</li>
+<li>вписал код и нажал&nbsp;«Сохранить».</li>
+<li>автоматически создался файл app.js (сработал Coffee-Compile) и изображение появилось на превью (сработал&nbsp;<span class="caps">HTML</span>-Preview).</li>
+</ul>
+<p><img src="/articles/on-windows-and-mac-for-free/16-coding.png" alt="Trying to code"></p>
+<p>На картинке видно, что превью отображается экран в размере 100%. Это неудобно, т. к. высота экрана Айфона в пикселях (1440px) больше, чем высота Макбука (900px). Плюс ко всему превью растягивает прототип в пропорциях&nbsp;окна. </p>
+<p>Чтобы это починить, можно вписать следующий код, который необходимо удалять перед публикацией прототипа в&nbsp;интернет:</p>
+<pre><code class="lang-CoffeeScript"><span class="comment"># Осторожно! Не копируйте этот код, а напишите сами —</span>
+<span class="comment"># при копировании сбиваются отступы и пробелы.</span>
+
+screen = <span class="keyword">new</span> Layer
+  <span class="attribute">width</span>: <span class="number">750</span>
+  <span class="attribute">height</span>: <span class="number">1334</span>
+  <span class="attribute">clip</span>: <span class="literal">true</span>
+  <span class="attribute">backgroundColor</span>: <span class="string">"black"</span>
+
+screen.scale = Screen.height / screen.height
+screen.center()
+Framer.Defaults.Layer.parent = screen
+</code></pre>
+<p><img src="/articles/on-windows-and-mac-for-free/17-device.png" alt="Device"></p>
+<h2 id="5-">5. Отправка прототипа&nbsp;коллегам</h2>
+<p>Одно из важнейших преимуществ Framer Studio по сравнению с редактором кода — возможность расшарить свой прототип в один клик: всем пользователям приложения предоставляется бесплатный хостинг на <strong>share.framerjs.com</strong>.</p>
+<p>Если у вас есть собственный хостинг, то можете загружать свой проект через ftp. В следующих статьях мы разберем, как загружать прототипы на бесплатный хостинг <a href="https://pages.github.com/">GitHub Pages</a> через приложение <a href="https://desktop.github.com/">GitHub Desktop</a>.</p>
+
+        <hr></article>
+      <script src="/js/article.js"></script>
+      <div class="comments">
+        <div id="disqus_thread"></div>
+        <script>
+          var disqus_config = function () {
+          	this.page.url = page.title;
+          	this.page.identifier = page.title;
+          };
+          (function() {
+          	var d = document, s = d.createElement('script');
+          	s.src = '//framer-russia.disqus.com/embed.js';
+          	s.setAttribute('data-timestamp', +new Date());
+          	(d.head || d.body).appendChild(s);
+          })();
+          
+        </script>
+        <noscript>
+          <p>please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></p>
+        </noscript>
+      </div>
+    </div>
+    <footer>&copy; 2016, <a href="https://www.facebook.com/groups/prototypingclub/" target="_blank">Russian Prototyping Club</a><br>Сделано с помощью <a href="https://github.com/jnordberg/wintersmith" target="_blank">Wintersmith</a>, <a href="http://jade-lang.com" target="_blank">Jade</a> и <a href="http://stylus-lang.com/" target="_blank">Stylus</a></footer>
+    <script type="text/javascript">
+      (function (d, w, c) {
+      (w[c] = w[c] || []).push(function() {
+      try {
+      w.yaCounter36023145 = new Ya.Metrika({
+      id:36023145,
+      clickmap:true,
+      trackLinks:true,
+      accurateTrackBounce:true
+      });
+      } catch(e) { }
+      });
+      var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+      s.type = "text/javascript";
+      s.async = true;
+      s.src = "https://mc.yandex.ru/metrika/watch.js";
+      if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+      } else { f(); }
+      })(document, window, "yandex_metrika_callbacks");
+    </script>
+  </body>
+</html>

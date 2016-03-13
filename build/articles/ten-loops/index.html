@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:image" content="learnframer.ru/framer.png">
+    <link rel="alternate" href="http://localhost:8080/feed.xml" type="application/rss+xml" title="Блог о прототипировании интерактивных продуктов">
+    <title>Десять видов циклов в CoffeeScript - Блог про Фреймер
+    </title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800,800italic,700italic,700,600italic,600,400italic,300italic,300&amp;subset=latin,cyrillic,cyrillic-ext,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700&amp;subset=latin,cyrillic-ext,cyrillic,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Cousine:400,400italic,700,700italic&amp;subset=latin,cyrillic,cyrillic-ext,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Mono&amp;subset=latin,cyrillic,latin-ext,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+  </head>
+  <body>
+    <header>
+      <ul class="logo">
+        <li><a href="/">Блог про Фреймер</a></li>
+        <li><a href="https://www.facebook.com/groups/prototypingclub/" target="_blank">Сообщество</a></li>
+      </ul>
+    </header>
+    <div class="content">
+      <div class="parallax"><img src="../../authors/anton.png" class="ava_big">
+        <h1>Десять видов циклов в CoffeeScript</h1>
+        <p class="metadata"><img src="../../authors/anton.png" class="ava_small"><span><a href="http://facebook.com/antonkartashov" target="_blank">Антон Карташов</a></span><span class="dot"> •</span><span><a href="/articles/ten-loops/">
+              <yo></yo>
+                    <time datetime="2016-03-04T09:00:00+03:00" title="Fri Mar 04 2016 09:00:00 GMT+0300">04 марта&nbsp;2016</time></a></span>
+        </p>
+      </div>
+      <div class="parallax displayNone"><img src="../../authors/anton.png" class="ava_big">
+        <h1>Десять видов циклов в CoffeeScript</h1>
+        <p class="metadata"><img src="../../authors/anton.png" class="ava_small"><span><a href="http://facebook.com/antonkartashov" target="_blank">Антон Карташов</a></span><span class="dot"> •</span><span><a href="/articles/ten-loops/">
+              <yo></yo>
+                    <time datetime="2016-03-04T09:00:00+03:00" title="Fri Mar 04 2016 09:00:00 GMT+0300">04 марта&nbsp;2016</time></a></span>
+        </p>
+      </div>
+      <article><hr>
+<p>В Фотошопе есть клевая&nbsp;панелька </p>
+<h2 id="-">Программирование — одна фишек&nbsp;Фреймера</h2>
+<p><span class="caps">GUI</span>-инструменты&nbsp;направлены </p>
+<pre><code class="lang-coffeescript"><span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">0.</span><span class="number">.40</span>]
+  item = <span class="keyword">new</span> Layer 
+    <span class="attribute">y</span>: <span class="number">210</span> * i + <span class="number">10</span>
+</code></pre>
+<p><img src="/articles/ten-loops/for-in.png" alt="for…in"></p>
+<p>Еще одно применение циклов — это работа с повторяющимися структурами&nbsp;данных. </p>
+<pre><code class="lang-coffeescript">data = JSON.parse Utils.domLoadDataSync <span class="string">"data/file.json"</span>
+users = data[<span class="string">"users"</span>]
+</code></pre>
+<pre><code class="lang-coffeescript"><span class="keyword">for</span> index <span class="keyword">in</span> [<span class="number">0.</span>.<span class="number">.5</span>]
+  user = users[index] 
+  nameData = user.name
+  roleData = user.role
+</code></pre>
+<pre><code class="lang-coffeescript"><span class="keyword">for</span> index <span class="keyword">in</span> [<span class="number">0.</span>.<span class="number">.5</span>]
+  user = users[index] 
+  nameData = user.name
+  roleData = user.role
+
+  layerA = <span class="keyword">new</span> Layer
+    <span class="attribute">y</span>: index * <span class="number">259</span> + <span class="number">40</span>
+    <span class="attribute">width</span>: <span class="number">750</span>, <span class="attribute">height</span>: <span class="number">256</span>
+    <span class="attribute">html</span>:
+      <span class="string">"&lt;h3&gt;<span class="subst">#{nameData}</span>&lt;/h3&gt;"</span> +
+      <span class="string">"&lt;p&gt;<span class="subst">#{roleData}</span>&lt;/p&gt;"</span>
+    <span class="attribute">style</span>:
+      <span class="attribute">font</span>: <span class="string">"300 1.8em 'Helvetica Neue'"</span>
+      <span class="attribute">padding</span>: <span class="string">"35px 40px"</span>
+      <span class="attribute">backgroundColor</span>: <span class="string">"#33333D"</span>
+</code></pre>
+<h2 id="-">Разновидности циклов во&nbsp;Фреймер</h2>
+<p>В большинстве языков существует три вида циклов: <code>for</code>, <code>while…</code> и <code>do… while</code>, и CoffeeScript (<code>for</code>, <code>while</code>, <code>loop</code>) в том числе, но Фреймер почему-то поддерживает только <code>for</code>. </p>
+<p>Зато в 10&nbsp;формах:</p>
+<h3 id="1-">1.&nbsp;Классика</h3>
+<p>Так:</p>
+<pre><code class="lang-coffeescript"><span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">0.</span><span class="number">.20</span>]
+  <span class="built_in">print</span> <span class="string">"Hellow world!"</span>
+</code></pre>
+<h3 id="2-">2. Сокращенная&nbsp;версия</h3>
+<p>Иногда итератор может быт не нужен, а CoffeeScript борется за&nbsp;лаконичность:</p>
+<pre><code class="lang-coffeescript"><span class="keyword">for</span> [<span class="number">0.</span><span class="number">.20</span>]
+</code></pre>
+<h3 id="3-">3. Расширенная&nbsp;версия</h3>
+<p>С возможностью менять&nbsp;шаг</p>
+<pre><code class="lang-coffeescript"><span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">0.</span><span class="number">.20</span>] <span class="keyword">by</span> <span class="number">2</span>
+</code></pre>
+<h3 id="4-">4. Цикл внутри&nbsp;массива</h3>
+<p>С возможностью менять&nbsp;шаг</p>
+<pre><code class="lang-coffeescript">names = [<span class="string">"Anton"</span>, <span class="string">"Nikolay"</span>, <span class="string">"Yuri"</span>]
+
+<span class="keyword">for</span> name <span class="keyword">in</span> names
+  <span class="built_in">print</span> name
+</code></pre>
+<h3 id="5-">5. Цикл внутри массива с&nbsp;параметром</h3>
+<p>С возможностью менять&nbsp;шаг</p>
+<pre><code class="lang-coffeescript">names = [<span class="string">"Anton"</span>, <span class="string">"Nikolay"</span>, <span class="string">"Yuri"</span>]
+
+<span class="keyword">for</span> name, i <span class="keyword">in</span> names
+  <span class="built_in">print</span> <span class="string">"<span class="subst">#{i}</span>. <span class="subst">#{name}</span></span>
+</code></pre>
+<h3 id="6-">6. Цикл внутри&nbsp;объекта</h3>
+<p>С возможностью менять&nbsp;шаг</p>
+<pre><code class="lang-coffeescript">object = 
+  <span class="string">"Name"</span>: <span class="string">"Anton Kartashov"</span>
+  <span class="string">"Age"</span>: <span class="number">26</span>
+  <span class="string">"City"</span>: <span class="string">"Moscow"</span>
+
+<span class="keyword">for</span> key, value <span class="keyword">of</span> object
+  <span class="built_in">print</span> <span class="string">"<span class="subst">#{key}</span> — <span class="subst">#{value}</span>"</span><span class="string">"</span>
+</code></pre>
+<h3 id="7-">7. Задом&nbsp;наперед</h3>
+<p>Для одного&nbsp;действия</p>
+<pre><code class="lang-coffeescript"><span class="built_in">print</span> <span class="string">"Hello"</span> <span class="keyword">for</span> <span class="keyword">in</span> [<span class="number">0.</span><span class="number">.10</span>]
+</code></pre>
+<h3 id="8-">8. Цикл с&nbsp;условием</h3>
+<pre><code class="lang-coffeescript">eat food <span class="keyword">for</span> food <span class="keyword">in</span> foods <span class="keyword">when</span> food <span class="keyword">isnt</span> <span class="string">'chocolate'</span>
+</code></pre>
+<h3 id="9-foreach-2">9. forEach: Цикл по массиву&nbsp;№2</h3>
+<p>Для массивов есть свой&nbsp;метод:</p>
+<pre><code class="lang-coffeescript">[<span class="string">"one"</span>, <span class="string">"two"</span>, <span class="string">"three"</span>].forEach text -&gt;
+  <span class="built_in">print</span> text
+</code></pre>
+<h3 id="10-">10. Цикл с повторением&nbsp;данных</h3>
+<p>Иногда хочется взять 3-5 картинов и сделать из них быстро длинный список — чтобы выглядело правдопободно, но без заморочек. Тогда можно гонять эти картинки по кругу. Чтобы понять как это делается нужно узнать операцию «остаток от&nbsp;деления»:</p>
+<p><code>33 / 5 = 6</code>, остаток: <code>3</code> </p>
+<p>В любом языке программирования его можно получить одной операцией (<code>modulo</code>):</p>
+<pre><code class="lang-coffeescript">number = <span class="number">33</span> % <span class="number">5</span>
+<span class="comment"># Теперь number == 3</span>
+</code></pre>
+<p>Например, у нас есть всего 4 картинки, мы хотим получить цикл на 50 итераций. По странному совпадению остаток от деления <code>i / 4</code> как раз всегда будет повторяться таким&nbsp;образом: </p>
+<pre><code>0 % 4 == 0
+1 % 4 == 1
+2 % 4 == 2
+3 % 4 == 3
+
+4 % 4 == 0
+5 % 4 == 1
+6 % 4 == 2
+7 % 4 == 3
+…
+</code></pre><p>Применяем:</p>
+<pre><code class="lang-coffeescript">pictures = [
+  <span class="string">"mountain.png"</span>
+  <span class="string">"river.png"</span>
+  <span class="string">"sky.png"</span>
+  <span class="string">"medvedev.png"</span>
+]
+
+
+<span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">0.</span><span class="number">.50</span>]
+  ii = i % <span class="number">4</span>
+  image = pictures[ii]
+
+  <span class="comment"># Либо</span>
+  image = pictures[i % <span class="number">4</span>]
+
+  <span class="comment"># Либо (если не хотим считать, сколько в массиве элементов)</span>
+  image = pictures[i % pictures.length]
+</code></pre>
+
+        <hr></article>
+      <script src="/js/article.js"></script>
+      <div class="comments">
+        <div id="disqus_thread"></div>
+        <script>
+          var disqus_config = function () {
+          	this.page.url = page.title;
+          	this.page.identifier = page.title;
+          };
+          (function() {
+          	var d = document, s = d.createElement('script');
+          	s.src = '//framer-russia.disqus.com/embed.js';
+          	s.setAttribute('data-timestamp', +new Date());
+          	(d.head || d.body).appendChild(s);
+          })();
+          
+        </script>
+        <noscript>
+          <p>please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></p>
+        </noscript>
+      </div>
+    </div>
+    <footer>&copy; 2016, <a href="https://www.facebook.com/groups/prototypingclub/" target="_blank">Russian Prototyping Club</a><br>Сделано с помощью <a href="https://github.com/jnordberg/wintersmith" target="_blank">Wintersmith</a>, <a href="http://jade-lang.com" target="_blank">Jade</a> и <a href="http://stylus-lang.com/" target="_blank">Stylus</a></footer>
+    <script type="text/javascript">
+      (function (d, w, c) {
+      (w[c] = w[c] || []).push(function() {
+      try {
+      w.yaCounter36023145 = new Ya.Metrika({
+      id:36023145,
+      clickmap:true,
+      trackLinks:true,
+      accurateTrackBounce:true
+      });
+      } catch(e) { }
+      });
+      var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+      s.type = "text/javascript";
+      s.async = true;
+      s.src = "https://mc.yandex.ru/metrika/watch.js";
+      if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+      } else { f(); }
+      })(document, window, "yandex_metrika_callbacks");
+    </script>
+  </body>
+</html>

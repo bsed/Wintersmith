@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:image" content="learnframer.ru/framer.png">
+    <link rel="alternate" href="http://localhost:8080/feed.xml" type="application/rss+xml" title="Блог о прототипировании интерактивных продуктов">
+    <title>Базовые концепции Quartz Composer и Origami - Блог про Фреймер
+    </title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800,800italic,700italic,700,600italic,600,400italic,300italic,300&amp;subset=latin,cyrillic,cyrillic-ext,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700&amp;subset=latin,cyrillic-ext,cyrillic,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Cousine:400,400italic,700,700italic&amp;subset=latin,cyrillic,cyrillic-ext,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Mono&amp;subset=latin,cyrillic,latin-ext,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+  </head>
+  <body>
+    <header>
+      <ul class="logo">
+        <li><a href="/">Блог про Фреймер</a></li>
+        <li><a href="https://www.facebook.com/groups/prototypingclub/" target="_blank">Сообщество</a></li>
+      </ul>
+    </header>
+    <div class="content">
+      <div class="parallax"><img src="../../authors/anton.png" class="ava_big">
+        <h1>Базовые концепции Quartz Composer и Origami</h1>
+        <p class="metadata"><img src="../../authors/anton.png" class="ava_small"><span><a href="http://facebook.com/antonkartashov" target="_blank">Антон Карташов</a></span><span class="dot"> •</span><span><a href="/articles/quartz-composer-and-origami/">
+              <yo></yo>
+                    <time datetime="2013-04-30T03:00:00+03:00" title="Tue Apr 30 2013 03:00:00 GMT+0300">30 апреля&nbsp;2013</time></a></span>
+        </p>
+      </div>
+      <div class="parallax displayNone"><img src="../../authors/anton.png" class="ava_big">
+        <h1>Базовые концепции Quartz Composer и Origami</h1>
+        <p class="metadata"><img src="../../authors/anton.png" class="ava_small"><span><a href="http://facebook.com/antonkartashov" target="_blank">Антон Карташов</a></span><span class="dot"> •</span><span><a href="/articles/quartz-composer-and-origami/">
+              <yo></yo>
+                    <time datetime="2013-04-30T03:00:00+03:00" title="Tue Apr 30 2013 03:00:00 GMT+0300">30 апреля&nbsp;2013</time></a></span>
+        </p>
+      </div>
+      <article><p>По Quartz Composer практически нет подробных руководств на русском языке. Ютюб полон видео-уроков, по которым можно повторить за автором его проект, но сделать свой собственный по-прежнему&nbsp;сложно.</p>
+<hr>
+<div class="iframe">
+    <img class="ratio">
+    <iframe 
+        src="https://coub.com/embed/5gbrg?muted=false&autostart=false&originalSize=false&hideTopBar=false&startWithHD=false" 
+        allowfullscreen="true" 
+        frameborder="0" >
+    </iframe>
+</div>
+
+<div class="iframe">
+    <img class="ratio">
+    <iframe
+        src="https://www.youtube.com/embed/m-9m67mHNHU?rel=0&amp;showinfo=0" 
+        frameborder="0" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+<div class="iframe">
+    <img class="ratio">
+    <iframe src="https://player.vimeo.com/video/68749840" 
+        frameborder="0" 
+        webkitallowfullscreen mozallowfullscreen allowfullscreen>
+    </iframe>
+</div>
+
+<p></p><img src="https://images.unsplash.com/photo-1432256851563-20155d0b7a39?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=d5a324231354ac81741afa04368410f0" /><p></p>
+<p><img src="http://turbo.paulstamatiou.com/uploads/2015/01/DSC08761-1000.jpg" alt="">
+<small>Традиционное программирование. Javascript</small></p>
+<p><img src="http://turbo.paulstamatiou.com/uploads/2015/01/DSC08761-1000.jpg" alt="Визуальное программирование. Quartz Composer"></p>
+<blockquote>
+<p>Этот текст - обычный лорем ипсум. Сейчас пойду куда-нибудь есть в Амстере. Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo&nbsp;consequat. </p>
+<p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est&nbsp;laborum.</p>
+</blockquote>
+<h2 id="links-in-the-markdown">Links in the&nbsp;markdown</h2>
+<p>This is where I leave you to your own devices. Join <strong>#wintersmith</strong> on freenode if you have any questions. For example a link to <code>../bamboo-cutter/index.md</code> resolves to <a href="/articles/bamboo-cutter/index.md"><code>/articles/bamboo-cutter/</code></a>.</p>
+<pre><code class="lang-coffeescript">page = <span class="keyword">new</span> PageComponent
+    <span class="attribute">size</span>: Screen.size
+    <span class="attribute">clip</span>: <span class="literal">false</span>
+    <span class="attribute">scrollVertical</span>: <span class="literal">false</span>
+    <span class="attribute">scale</span>: <span class="number">.75</span>
+
+<span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">0.</span><span class="number">.5</span>]
+    <span class="keyword">new</span> Layer 
+        <span class="attribute">backgroundColor</span>: Utils.randomColor()
+        <span class="attribute">width</span>: Screen.width, <span class="attribute">height</span>: <span class="number">1000</span>
+        <span class="attribute">y</span>: <span class="number">160</span>, <span class="attribute">borderRadius</span>: <span class="number">30</span>, <span class="attribute">scale</span>: <span class="number">.95</span>
+        <span class="attribute">x</span>: i * Screen.width
+        <span class="attribute">superLayer</span>: page.content
+
+page.draggable.props =
+    <span class="attribute">enabled</span>: <span class="literal">true</span>
+    <span class="attribute">horizontal</span>: <span class="literal">false</span>
+    <span class="attribute">constraints</span>: page.frame
+</code></pre>
+<h2 id="-">Патчи</h2>
+<p>Патч — базовый элемент Quartz Composer. Это аналог процедуры в традиционном программировании, он эквивалентен строке&nbsp;кода:</p>
+<p>Кружочки с обеих сторон патча — это порты (параметры функции). Через левые порты данные поступают в патч, через правые — выводится результат преобразования.
+На примере ниже четыре&nbsp;патча:</p>
+<ul>
+<li>Fill Layer заливает фон белым&nbsp;цветом.</li>
+<li>Touch отслеживает нажатие на экран.<ol>
+<li>Композиции</li>
+<li>Патчи</li>
+<li>Три типа патчей<ul>
+<li>Fill Layer заливает фон белым&nbsp;цветом.</li>
+<li>Touch отслеживает нажатие на&nbsp;экран.</li>
+</ul>
+</li>
+<li>Соединения и типы&nbsp;данных</li>
+<li>Система координат и единицы&nbsp;измерения</li>
+</ol>
+</li>
+<li>Button отрисовывает кнопку шириной 320 px с текстом «Sign in» и скруглениями в 24 px (эти значения можно прочитать рядом с названиями&nbsp;портов).</li>
+<li>Transition хранит в себе значения (Start Value, End Value), которые будут принимать Opacity и Scale кнопки по нажатию и&nbsp;отпусканию.</li>
+</ul>
+<h2 id="-">Содержание</h2>
+<p>Welcome to your new blog! This is the default blog template with <span class="caps">RSS</span>, pagination and an archive. There are other templates available – run <code>wintersmith new --help</code> to list&nbsp;them.</p>
+<h2 id="-">Типы&nbsp;патчей</h2>
+<p>Существует три типа: приемники (consumers), <em>обработчики</em> (processors) и <strong>*поставщики</strong> (providers).
+Изначально в Quartz Composer они различались <del>цветом</del>: поставщики — фиолетовые, обработчики — черные, приемники — синие. Обратите внимание, патчи-поставщики чаще всего имеют порты только справа — они всегда отдают данные. Аналогично у патчей-приемников чаще всего порты только слева — они всегда принимают данные от других&nbsp;патчей.</p>
+<table>
+<thead>
+<tr>
+<th>Tables</th>
+<th style="text-align:center">Are</th>
+<th style="text-align:right">Cool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>col 3 is</td>
+<td style="text-align:center">right-aligned</td>
+<td style="text-align:right">$1600</td>
+</tr>
+<tr>
+<td>col 2 is</td>
+<td style="text-align:center">centered</td>
+<td style="text-align:right">$12</td>
+</tr>
+<tr>
+<td>zebra stripes</td>
+<td style="text-align:center">are neat</td>
+<td style="text-align:right">$1</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<hr>
+<hr>
+<p>Существует три типа: приемники (consumers), <em>обработчики</em> (processors) и <strong>*поставщики</strong> (providers).
+Изначально в Quartz Composer они различались <del>цветом</del>: поставщики — фиолетовые, обработчики — черные, приемники — синие. Обратите внимание, патчи-поставщики чаще всего имеют порты только справа — они всегда отдают данные. Аналогично у патчей-приемников чаще всего порты только слева — они всегда принимают данные от других&nbsp;патчей.</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*77Fc-oAlR3LO-M5fWHw1BA.png" alt="IMAGE ALT TEXT HERE"></p>
+<p class="text-left">Left aligned&nbsp;text.</p>
+<p class="text-center">Center aligned&nbsp;text.</p>
+<p class="text-right">Right aligned&nbsp;text.</p>
+<p class="text-justify">Justified&nbsp;text.</p>
+<p class="text-nowrap">No wrap&nbsp;text.</p>
+
+<p>Small
+<small>This line of text is meant to be treated as fine print.</small></p>
+<p>You can use the mark tag to <mark>highlight</mark> text.</p>
+<p class="text-lowercase">Lowercased&nbsp;text.</p>
+<p class="text-uppercase">Uppercased&nbsp;text.</p>
+<p class="text-capitalize">Capitalized&nbsp;text.</p>
+
+<p><abbr title="attribute">attr</abbr></p>
+<p><abbr title="HyperText Markup Language" class="initialism"><span class="caps">HTML</span></abbr></p>
+<address>
+  <strong>Twitter, Inc.</strong><br>
+  1355 Market Street, Suite 900<br>
+  San Francisco, <span class="caps">CA</span> 94103<br>
+  <abbr title="Phone">P:</abbr> (123) 456-7890
+</address>
+
+<address>
+  <strong>Full Name</strong><br>
+  <a href="mailto:#">first.last@example.com</a>
+</address>
+
+<blockquote>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a&nbsp;ante.</p>
+  <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+</blockquote>
+
+
+<dl>
+    <dt>Description&nbsp;lists</dt>
+    <dd>A description list is perfect for defining&nbsp;terms.</dd>
+
+    <dt>Euismod</dt>
+    <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.
+Donec id elit non mi porta gravida at eget&nbsp;metus.</dd>
+
+    <dt>Malesuada&nbsp;porta</dt>
+    <dd>Etiam porta sem malesuada magna mollis&nbsp;euismod.</dd>
+
+</dl>
+
+<h3 id="user-input">User&nbsp;Input</h3>
+<p>To switch directories, type <kbd>cd</kbd> followed by the name of the directory.<br>
+To edit settings, press <kbd><kbd>ctrl</kbd> + <kbd>,</kbd></kbd></p>
+<p><samp>This text is meant to be treated as sample output from a computer program.</samp></p>
+<table class="table">
+  <tr>
+      <td>Hello</td>
+      <td>Goodbye</td>
+  </tr>
+
+  <tr>
+      <td>Hello</td>
+      <td>Goodbye</td>
+  </tr>
+</table>
+
+        <hr></article>
+      <script src="/js/article.js"></script>
+      <div class="comments">
+        <div id="disqus_thread"></div>
+        <script>
+          var disqus_config = function () {
+          	this.page.url = page.title;
+          	this.page.identifier = page.title;
+          };
+          (function() {
+          	var d = document, s = d.createElement('script');
+          	s.src = '//framer-russia.disqus.com/embed.js';
+          	s.setAttribute('data-timestamp', +new Date());
+          	(d.head || d.body).appendChild(s);
+          })();
+          
+        </script>
+        <noscript>
+          <p>please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></p>
+        </noscript>
+      </div>
+    </div>
+    <footer>&copy; 2016, <a href="https://www.facebook.com/groups/prototypingclub/" target="_blank">Russian Prototyping Club</a><br>Сделано с помощью <a href="https://github.com/jnordberg/wintersmith" target="_blank">Wintersmith</a>, <a href="http://jade-lang.com" target="_blank">Jade</a> и <a href="http://stylus-lang.com/" target="_blank">Stylus</a></footer>
+    <script type="text/javascript">
+      (function (d, w, c) {
+      (w[c] = w[c] || []).push(function() {
+      try {
+      w.yaCounter36023145 = new Ya.Metrika({
+      id:36023145,
+      clickmap:true,
+      trackLinks:true,
+      accurateTrackBounce:true
+      });
+      } catch(e) { }
+      });
+      var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+      s.type = "text/javascript";
+      s.async = true;
+      s.src = "https://mc.yandex.ru/metrika/watch.js";
+      if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+      } else { f(); }
+      })(document, window, "yandex_metrika_callbacks");
+    </script>
+  </body>
+</html>

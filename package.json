@@ -1,0 +1,11 @@
+{
+	"name": "Wintersmith",
+	"version": "1.0.0",
+	"description": "Blog about Framer.js",
+	"author": "Anton Kartashov",
+	"devDependencies": {
+		"moment": "2.3.x",
+		"underscore": "1.4.x",
+		"typogr": "0.5.x"
+	}
+}

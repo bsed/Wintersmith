@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:image" content="learnframer.ru/framer.png">
+    <link rel="alternate" href="http://localhost:8080/feed.xml" type="application/rss+xml" title="Блог о прототипировании интерактивных продуктов">
+    <title>Импорт макета из Sketch во Framer - Блог про Фреймер
+    </title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800,800italic,700italic,700,600italic,600,400italic,300italic,300&amp;subset=latin,cyrillic,cyrillic-ext,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700&amp;subset=latin,cyrillic-ext,cyrillic,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Cousine:400,400italic,700,700italic&amp;subset=latin,cyrillic,cyrillic-ext,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Mono&amp;subset=latin,cyrillic,latin-ext,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+  </head>
+  <body>
+    <header>
+      <ul class="logo">
+        <li><a href="/">Блог про Фреймер</a></li>
+        <li><a href="https://www.facebook.com/groups/prototypingclub/" target="_blank">Сообщество</a></li>
+      </ul>
+    </header>
+    <div class="content">
+      <div class="parallax"><img src="../../authors/anton.png" class="ava_big">
+        <h1>Импорт макета из Sketch во Framer</h1>
+        <p class="metadata"><img src="../../authors/anton.png" class="ava_small"><span><a href="http://facebook.com/antonkartashov" target="_blank">Антон Карташов</a></span><span class="dot"> •</span><span><a href="/articles/sketch-tips/index1.html">
+              <yo></yo>
+                    <time datetime="2016-03-11T11:00:00+03:00" title="Fri Mar 11 2016 11:00:00 GMT+0300">11 марта&nbsp;2016</time></a></span>
+        </p>
+      </div>
+      <div class="parallax displayNone"><img src="../../authors/anton.png" class="ava_big">
+        <h1>Импорт макета из Sketch во Framer</h1>
+        <p class="metadata"><img src="../../authors/anton.png" class="ava_small"><span><a href="http://facebook.com/antonkartashov" target="_blank">Антон Карташов</a></span><span class="dot"> •</span><span><a href="/articles/sketch-tips/index1.html">
+              <yo></yo>
+                    <time datetime="2016-03-11T11:00:00+03:00" title="Fri Mar 11 2016 11:00:00 GMT+0300">11 марта&nbsp;2016</time></a></span>
+        </p>
+      </div>
+      <article><p>Код — инструмент без ограничений. Но есть задачи, решать которые через программирование не самый легкий и, главное, не самый эффективный путь. Грамотная организация импорта из Скетча во Фреймер позволит этим инструментам дополнять друг друга: как можно раньше проверять гипотезы в интерактиве, вносить изменения в макет и моментально применять их к&nbsp;прототипу.</p>
+<p><img src="/articles/sketch-tips/sketch.png" alt="Framer + Sketch"></p>
+<hr>
+<h3 id="-">Фишки импорта во&nbsp;Фреймере:</h3>
+<ul>
+<li>работает с макетами, нарисованными в&nbsp;@1x.</li>
+<li>понимает артборды, маски, векторную&nbsp;графику.</li>
+<li>после импорта все слои хранятся в виде массивов, поэтому с ними можно работать&nbsp;группами.</li>
+</ul>
+<h2 id="1-">1. Ненужно расставлять графику на&nbsp;холсте</h2>
+<p>Фреймер сделает это автоматически в одно нажатие. Имена переменных во Фреймере будут совпадать с названиями папок в&nbsp;Скетче.</p>
+<ul>
+<li><strong>Артборды</strong> импортируется все сразу. Самый первый получит координаты (0; 0), остальные будут выравнены относительно него с теми же отступами, что и в Скетче. Если вы не использовали артбордов в макете, то слои будут импортироваться с их собственными&nbsp;координатами.</li>
+<li><strong>Группы слоев</strong> (папки) превращаютя в объекты типа <code>Layer</code> с соответствующими координатами и размерами. Очень важно давать правильные имена группам в Скетче, т. к. именно они и становятся слоями во Фреймере. (Артоборд тоже считается&nbsp;группой.)</li>
+<li><strong>Обычные слои</strong> внутри групп сливаются в одно растровое изображение и сохраняются как фоновое изображение группы (хранятся в свойстве <code>Layer.image</code>). Таким образом, совершенно неважно какие у них имена. Слои, которые не попали в группы сливаются в один растр и становятся фоновым изображением&nbsp;артборда.</li>
+<li><strong>Скрытые группы слоев</strong> тоже импортируются, но с параметром <code>visible: false</code>. По умолчанию, они невидимы, но в любой момент их можно включить через <code>Layer.visible = true</code>.</li>
+<li><strong>Background Color</strong> артбордов не передается (даже если включено свойство Include in Export). Его придется создавать вручную через объект <code>BackgroundLayer</code>. Либо цвет фона отдельным&nbsp;слоем.</li>
+</ul>
+<h2 id="2-">2. Правильной группируйте и именуйте&nbsp;слои</h2>
+<p>Слоями во Фреймере станут только группы слоев из Скетча и к ним можно будет&nbsp;обращаться: </p>
+<pre><code class="lang-CoffeeScript">sketch.header
+sketch.group
+sketch.user1
+sketch.user2
+sketch.user3
+sketch.tabBar
+</code></pre>
+<h3 id="-">Как называть папки в&nbsp;Скетче</h3>
+<p>Здесь работают правила именования переменных в&nbsp;JavaScript:</p>
+<ul>
+<li>Нельзя использовать&nbsp;пробелы. </li>
+<li>Цифры можно использовать, но не первым символом в&nbsp;названии. </li>
+<li>Нельзя использовать знаки пунктуации, кроме символов $ и&nbsp;_.</li>
+</ul>
+<p>Как обращаться
+Объекты и слои
+Разная&nbsp;структура:</p>
+<pre><code>1. Объекты: в обратном порядке, списком без иерархии
+2. Слои: иерархичны
+
+layer.on &quot;click&quot;, -&gt;
+</code></pre><h2 id="3-">3.&nbsp;Адаптивно</h2>
+<p>После обновления не сломается 
+maxX, midX,&nbsp;minX</p>
+<h2 id="4-">4. Используйте&nbsp;маски</h2>
+<pre><code>1. Создает слой со свойством clip: true
+2. Несколько масок: Сливает все маски в одну и делает растром в свойстве image: “images/?.png”
+</code></pre><p>Оборачивание в ScrollComponent
+ scroll =&nbsp;ScrollComponent.wrap(sketch.layer)</p>
+<h2 id="5-">5. Импортируйте векторную и растровую&nbsp;графику</h2>
+<p>layer*
+layer.pdf&nbsp;sketch[“layer.pdf”]</p>
+<h2 id="6-">6. Работайте со слоями внутри папок как с&nbsp;массивами</h2>
+<p>Вы можете применять действия ко всем слоям внутри конкретной папки, обращаться к ним по порядковому&nbsp;номеру.</p>
+<p>Циклы -&nbsp;программирование</p>
+<pre><code>1. for…in
+2. for…of
+3. eval(“js”) 
+
+   for x in [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;] 
+     eval &quot;pages.addPage(sketch.artboard#{x}, &#39;right&#39;)&quot;
+</code></pre>
+        <hr></article>
+      <script src="/js/article.js"></script>
+      <div class="comments">
+        <div id="disqus_thread"></div>
+        <script>
+          var disqus_config = function () {
+          	this.page.url = page.title;
+          	this.page.identifier = page.title;
+          };
+          (function() {
+          	var d = document, s = d.createElement('script');
+          	s.src = '//framer-russia.disqus.com/embed.js';
+          	s.setAttribute('data-timestamp', +new Date());
+          	(d.head || d.body).appendChild(s);
+          })();
+          
+        </script>
+        <noscript>
+          <p>please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></p>
+        </noscript>
+      </div>
+    </div>
+    <footer>&copy; 2016, <a href="https://www.facebook.com/groups/prototypingclub/" target="_blank">Russian Prototyping Club</a><br>Сделано с помощью <a href="https://github.com/jnordberg/wintersmith" target="_blank">Wintersmith</a>, <a href="http://jade-lang.com" target="_blank">Jade</a> и <a href="http://stylus-lang.com/" target="_blank">Stylus</a></footer>
+    <script type="text/javascript">
+      (function (d, w, c) {
+      (w[c] = w[c] || []).push(function() {
+      try {
+      w.yaCounter36023145 = new Ya.Metrika({
+      id:36023145,
+      clickmap:true,
+      trackLinks:true,
+      accurateTrackBounce:true
+      });
+      } catch(e) { }
+      });
+      var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+      s.type = "text/javascript";
+      s.async = true;
+      s.src = "https://mc.yandex.ru/metrika/watch.js";
+      if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+      } else { f(); }
+      })(document, window, "yandex_metrika_callbacks");
+    </script>
+  </body>
+</html>

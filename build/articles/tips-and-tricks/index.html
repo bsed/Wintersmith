@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:image" content="learnframer.ru/framer.png">
+    <link rel="alternate" href="http://localhost:8080/feed.xml" type="application/rss+xml" title="Блог о прототипировании интерактивных продуктов">
+    <title>Типс энд трикс - Блог про Фреймер
+    </title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800,800italic,700italic,700,600italic,600,400italic,300italic,300&amp;subset=latin,cyrillic,cyrillic-ext,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700&amp;subset=latin,cyrillic-ext,cyrillic,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Cousine:400,400italic,700,700italic&amp;subset=latin,cyrillic,cyrillic-ext,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Mono&amp;subset=latin,cyrillic,latin-ext,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+  </head>
+  <body>
+    <header>
+      <ul class="logo">
+        <li><a href="/">Блог про Фреймер</a></li>
+        <li><a href="https://www.facebook.com/groups/prototypingclub/" target="_blank">Сообщество</a></li>
+      </ul>
+    </header>
+    <div class="content">
+      <div class="parallax"><img src="../../authors/anton.png" class="ava_big">
+        <h1>Типс энд трикс</h1>
+        <p class="metadata"><img src="../../authors/anton.png" class="ava_small"><span><a href="http://facebook.com/antonkartashov" target="_blank">Антон Карташов</a></span><span class="dot"> •</span><span><a href="/articles/tips-and-tricks/">
+              <yo></yo>
+                    <time datetime="2016-03-01T03:00:00+03:00" title="Tue Mar 01 2016 03:00:00 GMT+0300">01 марта&nbsp;2016</time></a></span>
+        </p>
+      </div>
+      <div class="parallax displayNone"><img src="../../authors/anton.png" class="ava_big">
+        <h1>Типс энд трикс</h1>
+        <p class="metadata"><img src="../../authors/anton.png" class="ava_small"><span><a href="http://facebook.com/antonkartashov" target="_blank">Антон Карташов</a></span><span class="dot"> •</span><span><a href="/articles/tips-and-tricks/">
+              <yo></yo>
+                    <time datetime="2016-03-01T03:00:00+03:00" title="Tue Mar 01 2016 03:00:00 GMT+0300">01 марта&nbsp;2016</time></a></span>
+        </p>
+      </div>
+      <article><p>Десять трюков, которые могут упростить работо во&nbsp;Фреймере.</p>
+<hr>
+<h2 id="1-">1. Прозрачный&nbsp;фон</h2>
+<p>Вместо <code>backgroundColor: &quot;transparent&quot;</code> можно написать&nbsp;так:</p>
+<pre><code class="lang-coffeescript"><span class="attribute">backgroundColor</span>: <span class="literal">null</span>
+<span class="attribute">backgroundColor</span>: <span class="string">""</span>
+</code></pre>
+<h2 id="2-screen-">2. Глобальный объект <code>Screen</code></h2>
+<p>Чтобы прототип работал на любом телефоне, нужно прописывать ширину и высоту слоев не в абсолютных величинах (вроде «750 px»). Нужно выразить их через ширину и высоту&nbsp;экрана:</p>
+<pre><code class="lang-coffeescript">layer A = <span class="keyword">new</span> Layer
+    <span class="attribute">width</span>: Screen.width / <span class="number">2</span>
+    <span class="attribute">height</span>: Screen.height / <span class="number">2</span>
+
+    <span class="attribute">maxY</span>: Screen.height
+</code></pre>
+<p>Если размер слой заполняет весь экран, можно писать еще&nbsp;короче:</p>
+<pre><code class="lang-coffeescript">layer A = <span class="keyword">new</span> Layer
+    <span class="attribute">size</span>: Screen.size
+</code></pre>
+<h2 id="3-props-">3. <code>props</code></h2>
+<p>Если приходится менять параметры одного и того же объекта, то можно писать&nbsp;скоращенно:</p>
+<pre><code class="lang-coffeescript">layerA.width = <span class="number">200</span>
+layerA.opacity = <span class="number">.2</span>
+layerA.x = <span class="number">150</span>
+
+layerA.props =
+    <span class="attribute">width</span>: <span class="number">200</span>
+    <span class="attribute">opacity</span>: <span class="number">.2</span>
+    <span class="attribute">x</span>: <span class="number">150</span>
+
+layerA.draggable.props =
+    <span class="attribute">enabled</span>: <span class="literal">true</span>
+    <span class="attribute">horizontal</span>: <span class="literal">false</span>
+    <span class="attribute">constraints</span>:
+        <span class="attribute">x</span>: <span class="number">0</span>, <span class="attribute">y</span>: <span class="number">0</span>
+        <span class="attribute">width</span>: <span class="number">200</span>, <span class="attribute">height</span>: <span class="number">200</span>
+</code></pre>
+<p>Другие&nbsp;способы:</p>
+<pre><code class="lang-coffeescript"><span class="function"><span class="title">at</span> = <span class="params">(object, method)</span> -&gt;</span> method.call object
+
+at square, <span class="function">-&gt;</span>
+    <span class="property">@height</span> = <span class="number">400</span>
+    <span class="property">@width</span> = <span class="number">400</span>
+
+<span class="comment">###
+###</span>
+
+(<span class="function">-&gt;</span>
+    <span class="property">@height</span> = <span class="number">800</span>
+    <span class="property">@width</span> = <span class="number">800</span>
+).call square
+</code></pre>
+<p>Тоже самое, когда наоборот: много объектов, а нужно сделать с ними одно и то&nbsp;же:</p>
+<pre><code class="lang-coffeescript">square = <span class="keyword">new</span> Layer
+circle = <span class="keyword">new</span> Layer
+triangle = <span class="keyword">new</span> Layer
+
+<span class="keyword">for</span> layers <span class="keyword">in</span> [square, circle, triangle]
+    layers.backgroundColor = <span class="string">"blue"</span>
+</code></pre>
+<h2 id="3-frame-">3. <code>frame</code></h2>
+<p>Если приходится менять параметры одного и того же объекта, то можно писать&nbsp;скоращенно:</p>
+<pre><code class="lang-coffeescript">layerA.width = <span class="number">200</span>
+layerA.opacity = <span class="number">.2</span>
+layerA.x = <span class="number">150</span>
+</code></pre>
+<h2 id="4-">4. Замедлить все анимации в&nbsp;прототипе</h2>
+<p>Йо    </p>
+<pre><code class="lang-coffeescript">Framer.Loop.delta = <span class="number">1</span> / <span class="number">60</span> / <span class="number">5</span>
+</code></pre>
+<h2 id="5-">5. Анонимные&nbsp;слои</h2>
+<p>Не обязательно давать имена бэкграундам и&nbsp;слоям:</p>
+<pre><code class="lang-framerjs">new BackgroundLayer
+
+for i in [0..3]
+    new Layer
+        x: i * 120
+        backgroundColor: Utils.randomColor()
+</code></pre>
+<h2 id="5-">5. Анонимные&nbsp;слои</h2>
+<p>Не обязательно давать имена бэкграундам и&nbsp;слоям:</p>
+<pre><code class="lang-coffeescript"><span class="keyword">new</span> BackgroundLayer
+
+<span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">0.</span><span class="number">.3</span>]
+    <span class="keyword">new</span> Layer
+        <span class="attribute">x</span>: i * <span class="number">120</span>
+        <span class="attribute">backgroundColor</span>: Utils.randomColor()
+</code></pre>
+
+        <hr></article>
+      <script src="/js/article.js"></script>
+      <div class="comments">
+        <div id="disqus_thread"></div>
+        <script>
+          var disqus_config = function () {
+          	this.page.url = page.title;
+          	this.page.identifier = page.title;
+          };
+          (function() {
+          	var d = document, s = d.createElement('script');
+          	s.src = '//framer-russia.disqus.com/embed.js';
+          	s.setAttribute('data-timestamp', +new Date());
+          	(d.head || d.body).appendChild(s);
+          })();
+          
+        </script>
+        <noscript>
+          <p>please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></p>
+        </noscript>
+      </div>
+    </div>
+    <footer>&copy; 2016, <a href="https://www.facebook.com/groups/prototypingclub/" target="_blank">Russian Prototyping Club</a><br>Сделано с помощью <a href="https://github.com/jnordberg/wintersmith" target="_blank">Wintersmith</a>, <a href="http://jade-lang.com" target="_blank">Jade</a> и <a href="http://stylus-lang.com/" target="_blank">Stylus</a></footer>
+    <script type="text/javascript">
+      (function (d, w, c) {
+      (w[c] = w[c] || []).push(function() {
+      try {
+      w.yaCounter36023145 = new Ya.Metrika({
+      id:36023145,
+      clickmap:true,
+      trackLinks:true,
+      accurateTrackBounce:true
+      });
+      } catch(e) { }
+      });
+      var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+      s.type = "text/javascript";
+      s.async = true;
+      s.src = "https://mc.yandex.ru/metrika/watch.js";
+      if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+      } else { f(); }
+      })(document, window, "yandex_metrika_callbacks");
+    </script>
+  </body>
+</html>

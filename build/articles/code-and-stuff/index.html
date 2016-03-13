@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:image" content="learnframer.ru/framer.png">
+    <link rel="alternate" href="http://localhost:8080/feed.xml" type="application/rss+xml" title="Блог о прототипировании интерактивных продуктов">
+    <title>Code and stuff! - Блог про Фреймер
+    </title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800,800italic,700italic,700,600italic,600,400italic,300italic,300&amp;subset=latin,cyrillic,cyrillic-ext,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700&amp;subset=latin,cyrillic-ext,cyrillic,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Cousine:400,400italic,700,700italic&amp;subset=latin,cyrillic,cyrillic-ext,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Mono&amp;subset=latin,cyrillic,latin-ext,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+  </head>
+  <body>
+    <header>
+      <ul class="logo">
+        <li><a href="/">Блог про Фреймер</a></li>
+        <li><a href="https://www.facebook.com/groups/prototypingclub/" target="_blank">Сообщество</a></li>
+      </ul>
+    </header>
+    <div class="content">
+      <div class="parallax"><img src="../../authors/anton.png" class="ava_big">
+        <h1>Code and stuff!</h1>
+        <p class="metadata"><img src="../../authors/anton.png" class="ava_small"><span><a href="http://facebook.com/antonkartashov" target="_blank">Антон Карташов</a></span><span class="dot"> •</span><span><a href="/articles/code-and-stuff/">
+              <yo></yo>
+                    <time datetime="2012-10-01T15:00:00+03:00" title="Mon Oct 01 2012 15:00:00 GMT+0300">01 октября&nbsp;2012</time></a></span>
+        </p>
+      </div>
+      <div class="parallax displayNone"><img src="../../authors/anton.png" class="ava_big">
+        <h1>Code and stuff!</h1>
+        <p class="metadata"><img src="../../authors/anton.png" class="ava_small"><span><a href="http://facebook.com/antonkartashov" target="_blank">Антон Карташов</a></span><span class="dot"> •</span><span><a href="/articles/code-and-stuff/">
+              <yo></yo>
+                    <time datetime="2012-10-01T15:00:00+03:00" title="Mon Oct 01 2012 15:00:00 GMT+0300">01 октября&nbsp;2012</time></a></span>
+        </p>
+      </div>
+      <article><p>Syntax highlighting with <a href="http://softwaremaniacs.org/soft/highlight/en/">highlight.js</a>.
+The theme used is tomorrow, you can find more themes <a href="http://jmblog.github.io/color-themes-for-highlightjs/">here</a>.</p>
+<h2 id="framer-js">Framer.js</h2>
+<p>Syntax highlighting with <a href="http://softwaremaniacs.org/soft/highlight/en/">highlight.js</a>.
+The theme used is tomorrow, you can find more themes <a href="http://jmblog.github.io/color-themes-for-highlightjs/">here</a>.</p>
+<pre><code class="lang-coffeescript"><span class="keyword">new</span> BackgroundLayer
+
+col1 = <span class="keyword">new</span> Color(<span class="string">"limegreen"</span>).desaturate(<span class="number">40</span>).lighten(<span class="number">40</span>)
+col2 = <span class="keyword">new</span> Color(<span class="string">"limegreen"</span>)
+
+toggle = <span class="keyword">new</span> Layer
+  <span class="attribute">width</span>: <span class="number">200</span>
+  <span class="attribute">borderRadius</span>: <span class="number">100</span>
+  <span class="attribute">backgroundColor</span>: col1
+  <span class="attribute">midX</span>: Screen.width / <span class="number">2</span>
+  <span class="attribute">midY</span>: Screen.width / <span class="number">2</span>
+
+toggle.<span class="literal">on</span> Events.TouchStart, <span class="function">-&gt;</span>
+  <span class="keyword">if</span> container.x &lt; <span class="number">300</span> <span class="keyword">then</span> circle.states.<span class="keyword">switch</span> <span class="string">"pressedLeft"</span>
+  <span class="keyword">else</span> circle.states.<span class="keyword">switch</span> <span class="string">"pressedRight"</span>
+  border.states.<span class="keyword">switch</span> <span class="string">"pressed"</span>
+</code></pre>
+<h2 id="coffeescript">CoffeeScript</h2>
+<pre><code class="lang-coffeescript"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span></span>
+  <span class="comment">### Intellegent design ###</span>
+  <span class="attribute">getDNA</span>: <span class="function">-&gt;</span>
+    <span class="built_in">print</span> <span class="string">'sequencing...'</span>
+    <span class="keyword">while</span> <span class="literal">true</span>
+      sleep <span class="number">1</span>
+
+<span class="class"><span class="keyword">class</span> <span class="title">Monkey</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>
+  <span class="attribute">speak</span>: <span class="function">-&gt;</span>
+    <span class="built_in">print</span> <span class="string">'ah ah ah'</span>
+
+<span class="class"><span class="keyword">class</span> <span class="title">Human</span> <span class="keyword">extends</span> <span class="title">Monkey</span></span>
+  <span class="attribute">speak</span>: <span class="function">-&gt;</span>
+    <span class="built_in">print</span> [<span class="string">'yolo'</span> <span class="keyword">unless</span> i % <span class="number">3</span>] + [<span class="string">'swag'</span> <span class="keyword">unless</span> i % <span class="number">5</span>] <span class="keyword">or</span> i <span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">1.</span><span class="number">.100</span>]
+</code></pre>
+<h2 id="javascript">JavaScript</h2>
+<pre><code class="lang-javascript"><span class="function"><span class="keyword">function</span> <span class="title">getRandomNumber</span>(<span class="params"></span>) </span>{
+    <span class="keyword">return</span> <span class="number">4</span>; <span class="comment">// chosen by fair dice roll.</span>
+              <span class="comment">// guaranteed to be random.</span>
+}
+</code></pre>
+
+        <hr></article>
+      <script src="/js/article.js"></script>
+      <div class="comments">
+        <div id="disqus_thread"></div>
+        <script>
+          var disqus_config = function () {
+          	this.page.url = page.title;
+          	this.page.identifier = page.title;
+          };
+          (function() {
+          	var d = document, s = d.createElement('script');
+          	s.src = '//framer-russia.disqus.com/embed.js';
+          	s.setAttribute('data-timestamp', +new Date());
+          	(d.head || d.body).appendChild(s);
+          })();
+          
+        </script>
+        <noscript>
+          <p>please enable JavaScript to view the<a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></p>
+        </noscript>
+      </div>
+    </div>
+    <footer>&copy; 2016, <a href="https://www.facebook.com/groups/prototypingclub/" target="_blank">Russian Prototyping Club</a><br>Сделано с помощью <a href="https://github.com/jnordberg/wintersmith" target="_blank">Wintersmith</a>, <a href="http://jade-lang.com" target="_blank">Jade</a> и <a href="http://stylus-lang.com/" target="_blank">Stylus</a></footer>
+    <script type="text/javascript">
+      (function (d, w, c) {
+      (w[c] = w[c] || []).push(function() {
+      try {
+      w.yaCounter36023145 = new Ya.Metrika({
+      id:36023145,
+      clickmap:true,
+      trackLinks:true,
+      accurateTrackBounce:true
+      });
+      } catch(e) { }
+      });
+      var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+      s.type = "text/javascript";
+      s.async = true;
+      s.src = "https://mc.yandex.ru/metrika/watch.js";
+      if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+      } else { f(); }
+      })(document, window, "yandex_metrika_callbacks");
+    </script>
+  </body>
+</html>
