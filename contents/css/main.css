@@ -645,8 +645,8 @@ img + small {
   .index .ava_small {
     display: inline;
     position: relative;
-    width: 28px;
-    height: 28px;
+    width: 36px;
+    height: 36px;
     margin: 0;
     padding: 2px;
     top: 10px;
@@ -664,6 +664,17 @@ img + small {
     margin-top: 15px;
     padding-left: 25px;
   }
+  .metadata span {
+    position: relative;
+    left: 44px;
+    top: -36px;
+    line-height: 1.4em;
+    display: block;
+  }
+  .metadata .dot,
+  .index .dot {
+    display: none;
+  }
   .index .metadata {
     padding-bottom: -30px;
     margin-bottom: -10px;
@@ -680,11 +691,5 @@ img + small {
   }
   .logo li:last-child {
     right: 0px;
-  }
-}
-@media (max-width: 400px) {
-  .dot,
-  .metadata span:last-child {
-    display: none;
   }
 }

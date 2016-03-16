@@ -56,6 +56,7 @@ sketch.layerName.visible = true
 
 - Все пробелы в имени будут заменены на «_». 
 - Цифры можно использовать, но не первым символом в названии. Если хотя бы у одного слоя имя будет начинаться с числа, то импорт не состоится.
+- break case catch continue debugger default delete do else false finally for function if implements in instanceof interface let new null package private protected public return static switch throw true try typeof var void while with yield this
 - Нельзя использовать знаки пунктуации, кроме символов «$» и «_». Фреймер позволит импортировать слой с любым именем, но ошибки появятся при попытке вызовать неправильное имя. Либо можно забить и обращаться к слоям таким образом:
 
 ```CoffeeScript
