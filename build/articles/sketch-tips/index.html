@@ -26,31 +26,32 @@
         <h1>Импорт макета из Sketch во Framer</h1>
         <p class="metadata"><img src="../../authors/anton.png" class="ava_small"><span><a href="http://facebook.com/antonkartashov" target="_blank">Антон Карташов</a></span><span class="dot"> •</span><span><a href="/articles/sketch-tips/">
               <yo></yo>
-                    <time datetime="2016-03-11T11:00:00+03:00" title="Fri Mar 11 2016 11:00:00 GMT+0300">11 марта&nbsp;2016</time></a></span>
+                    <time datetime="2016-03-18T12:00:00+03:00" title="Fri Mar 18 2016 12:00:00 GMT+0300">18 марта&nbsp;2016</time></a></span>
         </p>
       </div>
       <div class="parallax displayNone"><img src="../../authors/anton.png" class="ava_big">
         <h1>Импорт макета из Sketch во Framer</h1>
         <p class="metadata"><img src="../../authors/anton.png" class="ava_small"><span><a href="http://facebook.com/antonkartashov" target="_blank">Антон Карташов</a></span><span class="dot"> •</span><span><a href="/articles/sketch-tips/">
               <yo></yo>
-                    <time datetime="2016-03-11T11:00:00+03:00" title="Fri Mar 11 2016 11:00:00 GMT+0300">11 марта&nbsp;2016</time></a></span>
+                    <time datetime="2016-03-18T12:00:00+03:00" title="Fri Mar 18 2016 12:00:00 GMT+0300">18 марта&nbsp;2016</time></a></span>
         </p>
       </div>
       <article><p>Код — инструмент без ограничений. Но есть задачи, решать которые через программирование не самый легкий и, главное, не самый эффективный путь. Грамотная организация импорта из Скетча во Фреймер позволит этим инструментам дополнять друг друга: как можно раньше проверять гипотезы в интерактиве, вносить изменения в макет и моментально применять их к&nbsp;прототипу.</p>
 <p><img src="/articles/sketch-tips/sketch.png" alt="Framer + Sketch"></p>
 <hr>
 <p>Фишки импорта во&nbsp;Фреймере:</p>
-<ul>
+<ol>
 <li>Все слои переносятся из Скетча в один клик. Фреймер сам расставляет их на холсте, поэтому «версткой» прототипа заниматься не&nbsp;придется.</li>
 <li>Работает с макетами, нарисованными в @1x. Позволяет масштабировать их в 1.5x, 2x, 3x и&nbsp;4x.</li>
 <li>Умеет импортировать&nbsp;вектор.</li>
 <li>Понимает артборды, маски, некоторые свойства обычных&nbsp;слоев.</li>
-</ul>
+</ol>
 <h2 id="-">Как устроен импорт&nbsp;слоев</h2>
-<p>Слоем во Фреймере станет каждая группа или символ из Скетча. Если внутри группы есть другая группа, то во Фреймере она станет вложенным слоем. Обычные слои внутри папки (как фигуры, так и текст) сольются в одну картинку и станут фоновым изображением своей папки. Слои, которые не попали ни в одну папку, станут фоновым изображением&nbsp;артборда.</p>
+<p>Слоем во Фреймере становится каждая группа или символ из Скетча. Вложенность папок сохраняется (артборды в это случае тоже считаются&nbsp;группой). </p>
+<p>Все несгруппированные слои (как фигуры, так и текст) будут слиты в растровую картинку и станут фоновым изображением той папки, внутри которой они&nbsp;лежат.</p>
 <p><img src="/articles/sketch-tips/02-layers.png" alt="Layers">
 <small>Слои Show More Copy, <span class="caps">NEARBY</span> и Rectangle 1119 станут фоном слоя nearby</small></p>
-<p>После импорта к слоям можно обращаться по их именам с приставкой <code>sketch.</code>:</p>
+<p>В коде к слоям можно обращаться по их именам с приставкой <code>sketch.</code>:</p>
 <pre><code class="lang-CoffeeScript"><span class="comment"># Правильно (sketch.слой.свойство):</span>
 sketch.nearby.opacity = <span class="number">0.25</span>
 sketch.Parking_Copy.draggable = <span class="literal">true</span>
@@ -74,14 +75,14 @@ sketch.nearby.Parking_Copy.opacity = <span class="number">0.25</span>
 <ul>
 <li>Все пробелы в имени будут заменены на&nbsp;«_». </li>
 <li>Цифры можно использовать, но не первым символом в названии. Если хотя бы у одного слоя имя будет начинаться с числа, то импорт не&nbsp;состоится.</li>
-<li>Нельзя использовать знаки пунктуации, кроме символов «$» и «_». Фреймер позволит импортировать слой с любым именем, но ошибки появятся при попытке вызовать неправильное имя. Либо можно забить и обращаться к слоям таким&nbsp;образом:</li>
+<li>Нельзя в качестве названия использовать зарезервированные в программировании слова, вроде <code>var</code>, <code>if</code>, <code>else</code>, <code>true</code>, <code>false</code>, <code>for</code>, <code>in</code>, <code>switch</code>, <code>function</code>, <code>interface</code>, <code>new</code>, <code>delete</code>, <code>this</code>, <code>default</code>…</li>
+<li>Нельзя использовать знаки пунктуации, кроме символов «<code>$</code>» и «<code>_</code>». Фреймер позволит импортировать слой с любым именем, но ошибки появятся при попытке использовать его в коде. Можно забить на это правило и обращаться к слоям таким&nbsp;образом:</li>
 </ul>
 <pre><code class="lang-CoffeeScript">sketch[<span class="string">"flat.design"</span>].opacity = <span class="number">0.25</span>
 </code></pre>
 <hr>
-<h2 id="-">Пять практических&nbsp;советов</h2>
-<h4 id="1-">1. Используйте маску в Скетче, чтобы создать скрол во&nbsp;Фреймере</h4>
-<p>Любая маска импортируется как обычный слой с параметром <code>clip: true</code> («не показывать содержимое за пределами слоя»). Одной строкой кода можно преобразовать маску из обычного объекта <code>Layer</code> в <code>ScrollComponent</code>:</p>
+<h2 id="-">Используйте маску в Скетче, чтобы создать скрол во&nbsp;Фреймере</h2>
+<p>Любая маска импортируется как обычный слой, но одной строкой кода ее можно преобразовать в <code>ScrollComponent</code>:</p>
 <pre><code class="lang-CoffeeScript">scroll = ScrollComponent.wrap(sketch.feed)
 </code></pre>
 <div class="iframe">
@@ -93,81 +94,78 @@ sketch.nearby.Parking_Copy.opacity = <span class="number">0.25</span>
 </div>
 
 <hr>
-<h4 id="2-pdf">2. Импортируйте векторную через&nbsp;<span class="caps">PDF</span></h4>
-<p>Про&nbsp;layer*</p>
-<p><img src="/articles/sketch-tips/vector.png" alt="Vector in PDF"></p>
-<pre><code class="lang-CoffeeScript">sketch[<span class="string">"layer.pdf"</span>]
+<h2 id="-pdf">Импортируйте векторную графику через&nbsp;<span class="caps">PDF</span></h2>
+<p>Просто в имени слоя укажите расширение <code>.pdf</code>. Использование точки в именах переменных запрещено, поэтому придется обращаться к слою&nbsp;так:</p>
+<pre><code class="lang-CoffeeScript">sketch[<span class="string">"icon.pdf"</span>].opacity = <span class="number">0.25</span>
 </code></pre>
+<p><img src="/articles/sketch-tips/vector.png" alt="Vector in PDF">
+<small>Теперь никакой размытой графики при увеличении в 20 раз</small></p>
 <hr>
-<h4 id="3-">3. Растрируйте ненужные группы и&nbsp;символы</h4>
-<p>Просто </p>
-<p><img src="/articles/sketch-tips/flattening.png" alt="Flattening"></p>
+<h2 id="-">Не импортируйте лишние&nbsp;слои</h2>
+<p>Сгруппируйте их в папку, название которой заканчивается символом «<code>*</code>», и Фреймер сольет все ее содерживое в одно растровое&nbsp;изображение.</p>
+<p><img src="/articles/sketch-tips/flattening.png" alt="Flattening">
+<small>Во Фреймер экспортируется только один слой — <code>status_bar_light</code></small></p>
 <hr>
-<h4 id="4-">4. Работайте со слоями как с&nbsp;массивами</h4>
-<p>Одно из преимущество кода — автоматизация. Вы можете применять однотипные события и анимации ко всем слоям внутри конкретной папки. Либо обращаться к ним по порядковому&nbsp;номеру.</p>
-<pre><code class="lang-CoffeeScript">array = [<span class="string">"A"</span>, <span class="string">"B"</span>, <span class="string">"C"</span>]
-
-<span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">0.</span><span class="number">.2</span>]
-    <span class="built_in">print</span> array[i]
-
-<span class="comment"># "A"</span>
-<span class="comment"># "B"</span>
-<span class="comment"># "C"</span>
+<h2 id="-">Работайте со слоями как с&nbsp;массивами</h2>
+<p>Большое преимущество Фреймера перед другими инструментами — программирование. Все слои импортируются из Скетча в виде массивов, поэтому мы можем редактировать разом все слои одного артборда или накладывать однотипные анимаций внутри отдельных&nbsp;групп. </p>
+<p>Например, мы хотим сдвинуть все слои внутри артборда на 20 пикселей. Мы можем сделать это через&nbsp;цикл:</p>
+<pre><code class="lang-CoffeeScript"><span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">0.</span><span class="number">.9</span>]
+    sketch.Artboard.children[i].x += <span class="number">20</span>
 </code></pre>
+<p>Либо мы можем уменьшить непрозрачность всех слоев внутри папки <code>megagroup</code> до&nbsp;20%:</p>
 <p><img src="/articles/sketch-tips/children.png" alt="Layer Children">
-<small>↑ Мы присвоили перменной layer все 8 дочерних слоев megagroup. Затем двумя строками кода выводим все их имена в консоль и меняем разом прозрачность</small></p>
-<pre><code class="lang-CoffeeScript"><span class="keyword">for</span> index <span class="keyword">in</span> [<span class="number">0.</span><span class="number">.7</span>]
-    <span class="built_in">print</span> sketch.megagroup.children[index]
-
-<span class="comment"># &lt;Layer id: 3  name:battery          (-640,  90)   28 x 28&gt;</span>
-<span class="comment"># &lt;Layer id: 4  name:Group_3          (-468,  50)  154 x 70&gt;</span>
-<span class="comment"># &lt;Layer id: 5  name:text             (-468,  50)  154 x 70&gt;</span>
-<span class="comment"># &lt;Layer id: 6  name:Group_2          (-688,   0)  158 x 112&gt;</span>
-<span class="comment"># &lt;Layer id: 7  name:Group            (-512, 100)  154 x 70&gt;</span>
-<span class="comment"># &lt;Layer id: 8  name:Group_Copy1      (-512, 100)  154 x 70&gt;</span>
-<span class="comment"># &lt;Layer id: 9  name:Group_Copy1_Copy (-512, 100)  154 x 70&gt;</span>
-<span class="comment"># &lt;Layer id:10  name:dots             (-640,  90)   28 x 28&gt;</span>
+<small>Мы присвоили перменной <code>layer</code> все 8 слоев внутри <code>megagroup</code>. Теперь одной стройкой кода мы можем вывести их имена либо поменять прозрачность</small></p>
+<p>В записи с диапазоном <code>[0..9]</code> неудобно то, что нужно заранее знать, сколько слоев внутри группы. Этого можно избежать: специально для массивов в CoffeeScript есть отдельный вид циклов <code>for—in</code>:</p>
+<pre><code class="lang-CoffeeScript"><span class="comment"># Подвинуть все слои внутри megagroup на 20px вправо</span>
+<span class="keyword">for</span> layer <span class="keyword">in</span> sketch.megagroup.children
+    layer.x + = <span class="number">20</span>
 </code></pre>
-<p>Также CoffeeScript поддерживет особую форму циклов специально для массивов (в этом случае цикл сам посчитает, сколько раз ему нужно&nbsp;повториться):</p>
-<pre><code class="lang-CoffeeScript"><span class="keyword">for</span> layerX <span class="keyword">in</span> sketch.megagroup.children
-    <span class="built_in">print</span> layerX
-
-<span class="comment"># &lt;Layer id: 3  name:battery          (-640,  90)   28 x 28&gt;</span>
-<span class="comment"># &lt;Layer id: 4  name:Group_3          (-468,  50)  154 x 70&gt;</span>
-<span class="comment"># &lt;Layer id: 5  name:text             (-468,  50)  154 x 70&gt;</span>
-<span class="comment"># &lt;Layer id: 6  name:Group_2          (-688,   0)  158 x 112&gt;</span>
-<span class="comment"># &lt;Layer id: 7  name:Group            (-512, 100)  154 x 70&gt;</span>
-<span class="comment"># &lt;Layer id: 8  name:Group_Copy1      (-512, 100)  154 x 70&gt;</span>
-<span class="comment"># &lt;Layer id: 9  name:Group_Copy1_Copy (-512, 100)  154 x 70&gt;</span>
-<span class="comment"># &lt;Layer id:10  name:dots             (-640,  90)   28 x 28&gt;</span>
+<p>Иногда параметр цикла все-таки&nbsp;нужен:</p>
+<pre><code class="lang-CoffeeScript"><span class="comment"># 1-й слой подвинется на 20px, </span>
+<span class="comment"># 2-й — на 40px, 3-й — на 60px…</span>
+<span class="keyword">for</span> layer, i <span class="keyword">in</span> sketch.megagroup.children
+    layer.x += <span class="number">20</span> * i
 </code></pre>
-<p>Если нам все же необходимо знать номер индекса, мы можем написать&nbsp;так:</p>
-<pre><code class="lang-CoffeeScript"><span class="keyword">for</span> layerX, index <span class="keyword">in</span> sketch.megagroup.children
-    <span class="built_in">print</span> index, layerX.name
-
-<span class="comment"># 0, "battery"</span>
-<span class="comment"># 1, "Group_3"</span>
-<span class="comment"># 2, "text"</span>
-<span class="comment"># 3, "Group_2"</span>
-<span class="comment"># 4, "Group"</span>
-<span class="comment"># 5, "Group_Copy1"</span>
-<span class="comment"># 6, "Group_Copy1_Copy"</span>
-<span class="comment"># 7, "dots"</span>
+<p>Цикл <code>for—in</code> работает только с «детьми» указанной группы, а «дети ее детей» уже недоступны. Например, если вывести все вложенные слои артборда <code>Search</code> то увидим только&nbsp;один:</p>
+<pre><code class="lang-CoffeeScript"><span class="keyword">for</span> layer, i <span class="keyword">in</span> sketch.Search.children
+    <span class="built_in">print</span> layer.name
+<span class="comment"># → "megagroup"</span>
 </code></pre>
+<p>Доступ к абсолютно всем импортированным слоям можно получить через объект <code>sketch</code>. Для объектов в CoffeeSctipt тоже есть отдельный вид циклов — <code>for–of</code>:</p>
+<pre><code class="lang-CoffeeScript"><span class="keyword">for</span> k, layer <span class="keyword">of</span> sketch
+    layer.visible = <span class="literal">false</span>
+</code></pre>
+<p><img src="/articles/sketch-tips/04-sketch-object.png" alt="">
+<small>Внутри объекта sketch все слои хранятся без учета иерархии и в обратном порядке</small></p>
 <hr>
-<h4 id="5-">5. Работайте с относительными&nbsp;значениями</h4>
-<p>Еще одно из преимуществ программирования — вычисления. Чтобы сделать ваш прототип более устойчивым к изменениям размеров и координат разных слоев, прописывайте все величины не числами, а процентами размеров экрана. Например, вместо&nbsp;этого:</p>
-<pre><code class="lang-CoffeeScript">sketch.layer.x     = <span class="number">100</span>
-sketch.layer.width = <span class="number">650</span>
+<h2 id="-">Работайте с относительными&nbsp;значениями</h2>
+<p>Еще одно из преимуществ программирования — вычисления. Указывайте все размеры и координаты не абсолютными значениями, а относительно размеров&nbsp;экрана. </p>
+<p>Вы сможете сделать ваш прототип более устойчивым к постоянным изменениям размеров и координат любого элемента на экране. Вы даже сможете сделать прототип адаптивным, и он будет корректно отображаться на больших и маленьких экранах. В этом поможет глобальный объект <code>Screen</code>, который хранит всю информацию о размерах&nbsp;окна:</p>
+<pre><code class="lang-CoffeeScript"><span class="built_in">print</span> Screen.width  <span class="comment"># → 750 для iPhone 6</span>
+<span class="built_in">print</span> Screen.height <span class="comment"># → 1334</span>
+
+sketch.card.height = Screen.height * <span class="number">0.4</span> + <span class="number">20</span>
+sketch.card.width  = Screen.width - <span class="number">100</span>
+
+sketch.background.size  = Screen.size
 </code></pre>
-<p>…пишите лучше&nbsp;так:</p>
-<pre><code class="lang-CoffeeScript">sketch.header.maxX  = Screen.width
-sketch.header.width = Screen.width - <span class="number">100</span>
+<p>Чтобы не повторять каждый раз приставку <code>sketch.layer.</code> в каждой строке, можно использовать атрибут <code>props</code>:</p>
+<pre><code class="lang-CoffeeScript">sketch.card.props = 
+    <span class="attribute">height</span>:  Screen.height * <span class="number">0.4</span> + <span class="number">20</span>
+    <span class="attribute">width</span>:   Screen.width - <span class="number">100</span>
+    <span class="attribute">opacity</span>: <span class="number">0.5</span>
 </code></pre>
-<p>Теперь, если изменится размер экрана или вы измените ширину слоя, то при обновлении импорта все значения пересчитаютяс&nbsp;автоматически.</p>
-<p>Чтобы выравить объект по центру экрана можно писать&nbsp;так:</p>
-<pre><code class="lang-CoffeeScript">sketch.header.midX = Screen.width  / <span class="number">2</span>
-sketch.header.midY = Screen.height / <span class="number">2</span>
+<p>Указывать координаты объектов через <code>x</code> и <code>y</code> — не единственная возможность. Иногда удобно выравнивать объект относительно его центра или правого&nbsp;края.</p>
+<pre><code class="lang-CoffeeScript">sketch.card.x    = <span class="number">40</span>
+sketch.card.midX = <span class="number">80</span>
+sketch.card.maxX = <span class="number">120</span>
+</code></pre>
+<p>Результат любой из этих трех строк выдаст один и тот же&nbsp;результат:</p>
+<center><img src="maxx.png" style="width: 160px; height: 160px" /></center>
+
+<p>Например, так мы можем выравнивать объект по центру&nbsp;экрана:</p>
+<pre><code class="lang-CoffeeScript">sketch.card.midX = Screen.width  / <span class="number">2</span>
+sketch.card.midY = Screen.height / <span class="number">2</span>
 </code></pre>
 
         <hr></article>

@@ -25,6 +25,8 @@ a:visited {
   letter-spacing: 0.01em;
 }
 p,
+dl,
+table,
 h1,
 h2,
 h3,
@@ -40,6 +42,8 @@ blockquote {
   box-sizing: border-box;
 }
 p,
+dl,
+table,
 h2,
 h3,
 h4,
@@ -55,7 +59,7 @@ h3,
 h4,
 h5,
 h6 {
-  padding-right: 1em;
+  padding-right: 2em;
 }
 h1,
 h2,
@@ -98,7 +102,7 @@ h5,
 h6 {
   font-family: "Roboto";
   font-weight: 400;
-  color: #000;
+  opacity: 1;
   letter-spacing: -0.005em;
   margin: 1.6em auto -1em auto;
   line-height: 1.4em;
@@ -125,29 +129,17 @@ h5:after {
   opacity: 0.2;
   font-size: 2em;
 }
-h5:before {
-  content: "«";
-  display: block;
-  margin-left: -27px;
-  margin-bottom: -0.7em;
-}
-h5:after {
-  content: "»";
-  line-height: 0;
-  position: relative;
-  top: 5px;
-  margin-left: 5px;
-}
 .comments {
   width: 700px;
   margin: 2em auto;
 }
 blockquote {
-  border-left: 2px solid rgba(50,40,0,0.3);
-  color: #4b3c00;
+  border-left: 2px solid rgba(30,20,0,0.3);
+  box-sizing: border-box;
+  color: #503200;
   width: 700px;
   opacity: 1;
-  background-color: rgba(100,80,0,0.04);
+  background-color: rgba(80,60,0,0.04);
   border-radius: 0 5px 5px 0;
   margin: auto;
   padding-top: 1px;
@@ -207,7 +199,7 @@ article a:hover {
 b,
 strong {
   font-weight: 400;
-  color: #000;
+  opacity: 1;
 }
 i,
 em {
@@ -273,9 +265,40 @@ ul li:before {
   margin-right: 14px;
   text-align: right;
 }
-small {
+small,
+table {
   font-size: 0.8em;
-  line-height: 1.8em;
+  line-height: 1.7em;
+}
+table {
+  border-collapse: collapse;
+}
+th {
+  text-align: left;
+  font-weight: 400;
+}
+td {
+  padding-right: 30px;
+  vertical-align: top;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
+dt,
+dd {
+  margin: 0;
+  padding: 0;
+}
+dt {
+  display: inline-block;
+  width: 30%;
+  text-align: right;
+  padding-right: 20px;
+  padding-bottom: 11px;
+}
+dd {
+  display: inline-block;
+  width: 60%;
+  padding-bottom: 11px;
 }
 .index .metadata {
   text-align: left;
@@ -418,6 +441,7 @@ pre {
   overflow: auto;
   border-radius: 0 0.2em 0.2em 0;
   border-left: 2px solid rgba(0,10,40,0.1);
+  box-sizing: border-box;
   margin: auto;
 }
 pre code {
@@ -478,9 +502,10 @@ img + small {
 }
 @media (max-width: 890px) {
   body {
-    font-size: 15pt;
+    font-size: 14pt;
   }
   h1,
+  table,
   p,
   h2,
   h3,
@@ -542,6 +567,7 @@ img + small {
   }
   h1,
   p,
+  table,
   h2,
   h3,
   h4,
@@ -599,10 +625,19 @@ img + small {
     margin-bottom: 30.799999999999997px;
   }
   blockquote p {
-    padding: 10px 0;
+    padding: 0;
+  }
+  blockquote p:first-child {
+    padding-top: 15px;
+  }
+  blockquote p:last-child {
+    padding-bottom: 10px;
+  }
+  blockquote {
+    border-left: 0;
   }
   article {
-    margin-top: 40px;
+    margin-top: 0;
   }
   .parallax {
     padding-top: 5px;
@@ -611,6 +646,7 @@ img + small {
     width: 100%;
     padding: 0;
     border-radius: 0;
+    border-left: 0;
   }
   pre code {
     padding: 15px 20px;
@@ -663,6 +699,9 @@ img + small {
     padding: 0;
     margin-top: 15px;
     padding-left: 25px;
+  }
+  .index section {
+    margin-top: -35px;
   }
   .metadata span {
     position: relative;
